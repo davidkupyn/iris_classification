@@ -1,4 +1,4 @@
-package main
+package models
 
 import (
 	"fmt"
@@ -12,10 +12,10 @@ type IrisClassifer struct {
 }
 
 func (c *IrisClassifer) Fit(X, y interface{}) {
-	
+
 }
 
-func main() {
+func NN() {
 	datasetFile, err := os.Open("iris.csv")
 	if err != nil {
 		log.Fatal(err)

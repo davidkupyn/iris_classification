@@ -1,39 +1,30 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"time"
 
-	"github.com/sjwhitworth/golearn/base"
-	"github.com/sjwhitworth/golearn/evaluation"
-	"github.com/sjwhitworth/golearn/knn"
+	"github.com/davidkupyn/iris_classification/models"
 )
 
-func main2() {
-	start := time.Now()
+func main() {
+	var goLearn, goro bool
 
-	rawData, err := base.ParseCSVToInstances("iris.csv", true)
-	if err != nil {
-		panic(err)
+	flag.BoolVar(&goLearn, "gl", false, "Set goLearn to true")
+	flag.BoolVar(&goro, "gr", false, "Set Goro to true")
+	flag.Parse()
+
+	if goLearn {
+		models.GoLearn()
 	}
 
-	fmt.Println(rawData)
-
-	cls := knn.NewKnnClassifier("euclidean", "linear", 2)
-
-	trainData, testData := base.InstancesTrainTestSplit(rawData, 0.50)
-	cls.Fit(trainData)
-
-	predictions, err := cls.Predict(testData)
-	if err != nil {
-		panic(err)
+	if goro {
+		models.NN()
 	}
 
-	confusionMat, err := evaluation.GetConfusionMatrix(testData, predictions)
-	if err != nil {
-		panic(fmt.Sprintf("Unable to get confusion matrix: %s", err.Error()))
+	if !goLearn && !goro {
+		fmt.Println("Neither goLearn nor Goro is set.")
+		fmt.Println()
+		flag.PrintDefaults()
 	}
-	fmt.Println(evaluation.GetSummary(confusionMat))
-
-	fmt.Println("Time elapsed:", time.Since(start))
 }
