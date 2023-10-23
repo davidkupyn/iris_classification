@@ -8,16 +8,6 @@ import (
 	"github.com/go-gota/gota/dataframe"
 )
 
-type IrisClassifer struct{}
-
-func (c *IrisClassifer) Fit(X, y interface{}) {
-	fmt.Println("Fitting")
-}
-
-func (c *IrisClassifer) Predict(X interface{}) {
-	fmt.Println("Predicting")
-}
-
 func getDataset(name string) dataframe.DataFrame {
 	datasetFile, err := os.Open("iris.csv")
 	if err != nil {
