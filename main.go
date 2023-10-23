@@ -18,10 +18,10 @@ func main() {
 		models.GoLearn()
 	}
 
-	if goro {
+	if goro || !goLearn {
 		models.NN()
 	}
-
+	
 	if !goLearn && !goro {
 		fmt.Println("Neither goLearn nor Goro is set.")
 		fmt.Println()

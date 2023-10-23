@@ -2,27 +2,60 @@ package models
 
 import (
 	"fmt"
-	"log"
 	"os"
 
+	m "github.com/aunum/goro/pkg/v1/model"
 	"github.com/go-gota/gota/dataframe"
 )
 
-type IrisClassifer struct {
-}
+type IrisClassifer struct{}
 
 func (c *IrisClassifer) Fit(X, y interface{}) {
-
+	fmt.Println("Fitting")
 }
 
-func NN() {
+func (c *IrisClassifer) Predict(X interface{}) {
+	fmt.Println("Predicting")
+}
+
+func getDataset(name string) dataframe.DataFrame {
 	datasetFile, err := os.Open("iris.csv")
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	defer datasetFile.Close()
 
 	dataset := dataframe.ReadCSV(datasetFile)
 
-	fmt.Println(dataset)
+	return dataset
+}
+
+func generateXY(dataset dataframe.DataFrame) (X, Y dataframe.DataFrame) {
+	X = dataset.Drop([]string{"Id", "Species"})
+	Y = dataset.Select("Species")
+	return X, Y
+}
+
+func NN() {
+	data := getDataset("iris.csv")
+	X, Y := generateXY(data)
+	fmt.Println(X)
+	fmt.Println(Y)
+	model, err := m.NewSequential("iris")
+	if err != nil {
+		panic(err)
+	}
+
+	model.AddLayers(
+		// layer.NewReLU(),
+	)
+
+	// model.Fit(nil, nil)
+
+	// prediction, err := model.Predict(nil)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	
+	// fmt.Println(prediction)
 }
