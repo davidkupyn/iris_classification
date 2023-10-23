@@ -3,6 +3,7 @@ module github.com/davidkupyn/iris_classification
 go 1.21.3
 
 require (
+	github.com/aunum/goro v0.0.0-20210130030158-f83957ed3c81
 	github.com/go-gota/gota v0.12.0
 	github.com/sjwhitworth/golearn v0.0.0-20221228163002-74ae077eafb2
 )
@@ -11,7 +12,6 @@ require (
 	git.sr.ht/~sbinet/gg v0.3.1 // indirect
 	github.com/ajstarks/svgo v0.0.0-20211024235047-1546f124cd8b // indirect
 	github.com/aunum/gold v0.0.0-20200329164505-1b7f92d6b247 // indirect
-	github.com/aunum/goro v0.0.0-20210130030158-f83957ed3c81 // indirect
 	github.com/aunum/log v0.0.0-20200321163253-24c356e939b0 // indirect
 	github.com/awalterschulze/gographviz v0.0.0-20190522210029-fa59802746ab // indirect
 	github.com/chewxy/hm v1.0.0 // indirect
